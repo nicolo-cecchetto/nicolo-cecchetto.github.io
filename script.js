@@ -15,7 +15,8 @@
   var translations = {
     it: {
       meta_title: "Nicolò Cecchetto | Digital Management, Operations e Business Development",
-      meta_desc: "Portfolio di Nicolò Cecchetto, studente di Digital Management a Ca' Foscari, in Erasmus+ a Stoccolma. Operations, business development e analisi aziendale. Cerco un tirocinio di circa 600 ore.",
+       // dentro it: { ... }
+      meta_desc: "Portfolio di Nicolò Cecchetto (Nicolo Cecchetto), studente di Digital Management a Ca' Foscari. Operations e business development. Cerco un tirocinio di circa 600 ore.",
       skip: "Vai al contenuto",
 
       aria_home: "Torna all'inizio",
@@ -139,7 +140,8 @@
 
     en: {
       meta_title: "Nicolò Cecchetto | Digital Management, Operations & Business Development",
-      meta_desc: "Portfolio of Nicolò Cecchetto, Digital Management student at Ca' Foscari University, on Erasmus+ in Stockholm. Operations, business development and business analysis. Looking for an internship of about 600 hours.",
+       // dentro en: { ... }
+      meta_desc: "Portfolio of Nicolò Cecchetto (Nicolo Cecchetto), Digital Management student at Ca' Foscari University. Operations and business development. Looking for an internship of about 600 hours.",
       skip: "Skip to content",
 
       aria_home: "Back to top",
