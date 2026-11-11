@@ -1,40 +1,407 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" data-theme="dark">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nicolo Cecchetto | Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Titolo e SEO (tradotti da script.js tramite data-i18n / data-i18n-content) -->
+  <title data-i18n="meta_title">Nicolò Cecchetto | Digital Management, Operations e Business Development</title>
+  <meta name="description" data-i18n-content="meta_desc" content="Portfolio di Nicolò Cecchetto, studente di Digital Management a Ca' Foscari, in Erasmus+ a Stoccolma. Operations, business development e analisi aziendale. Cerco un tirocinio di circa 600 ore.">
+  <meta name="author" content="Nicolò Cecchetto">
+  <meta name="theme-color" content="#0a0b10">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" data-i18n-content="meta_title" content="Nicolò Cecchetto | Digital Management, Operations e Business Development">
+  <meta property="og:description" data-i18n-content="meta_desc" content="Portfolio di Nicolò Cecchetto, studente di Digital Management a Ca' Foscari, in Erasmus+ a Stoccolma. Operations, business development e analisi aziendale. Cerco un tirocinio di circa 600 ore.">
+  <meta property="og:locale" content="it_IT">
+  <meta property="og:locale:alternate" content="en_GB">
+
+  <!-- Favicon SVG inline -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%230a0b0f'/%3E%3Ctext x='50' y='68' font-size='56' font-family='sans-serif' font-weight='700' text-anchor='middle' fill='%233d8bff'%3EN%3C/text%3E%3C/svg%3E">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="style.css">
+
+  <!-- Script minimo nell'head: imposta il tema PRIMA del rendering (evita il "flash" di colore)
+       e segnala che JS è attivo (le animazioni di comparsa si attivano solo con JS). -->
+  <script>
+    (function () {
+      var root = document.documentElement;
+      root.classList.add('js');
+      try {
+        var t = localStorage.getItem('nc-theme');
+        if (t !== 'light' && t !== 'dark') {
+          // Nessuna scelta salvata: rispetta il sistema, altrimenti scuro
+          t = (window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark';
+        }
+        root.setAttribute('data-theme', t);
+      } catch (e) {
+        root.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
 </head>
+
 <body>
-  <header>
-    <h1>Nicolo Cecchetto</h1>
-    <p>Il tuo ruolo (es. Web Developer, Designer, Marketing Specialist)</p>
+  <a class="skip-link" href="#main" data-i18n="skip">Vai al contenuto</a>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <!-- ============ NAVBAR ============ -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="#home" class="brand" data-i18n-aria="aria_home" aria-label="Torna all'inizio">
+        <span class="brand-mark">NC</span>
+        <span class="brand-name">Nicolò Cecchetto</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks" data-i18n-aria="aria_nav" aria-label="Navigazione principale">
+        <a href="#about" data-i18n="nav_about">Chi sono</a>
+        <a href="#experience" data-i18n="nav_experience">Esperienza</a>
+        <a href="#education" data-i18n="nav_education">Formazione</a>
+        <a href="#skills" data-i18n="nav_skills">Competenze</a>
+        <a href="#languages" data-i18n="nav_languages">Lingue</a>
+        <a href="#interests" data-i18n="nav_interests">Interessi</a>
+        <a href="#contact" data-i18n="nav_contact">Contatti</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="icon-btn lang-btn" id="langToggle" type="button" aria-label="Switch to English">
+          <span id="langLabel">EN</span>
+        </button>
+        <button class="icon-btn" id="themeToggle" type="button" data-i18n-aria="aria_theme" aria-label="Cambia tema chiaro/scuro">
+          <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </button>
+        <button class="icon-btn menu-btn" id="menuToggle" type="button" aria-expanded="false" aria-controls="navLinks" data-i18n-aria="aria_menu" aria-label="Apri il menu">
+          <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        </button>
+      </div>
+    </div>
   </header>
 
-  <section id="chi-sono">
-    <h2>Chi sono</h2>
-    <p>Due o tre righe su di te, cosa fai e cosa ti appassiona.</p>
-  </section>
+  <main id="main">
 
-  <section id="progetti">
-    <h2>Progetti</h2>
-    <div class="card">
-      <h3>Nome progetto 1</h3>
-      <p>Breve descrizione di cosa hai fatto e con quali strumenti.</p>
-      <a href="#">Vedi progetto</a>
-    </div>
-    <div class="card">
-      <h3>Nome progetto 2</h3>
-      <p>Breve descrizione.</p>
-      <a href="#">Vedi progetto</a>
-    </div>
-  </section>
+    <!-- ============ HERO ============ -->
+    <section id="home" class="hero">
+      <div class="hero-bg" aria-hidden="true">
+        <span class="blob b1"></span>
+        <span class="blob b2"></span>
+        <span class="grid"></span>
+      </div>
+      <div class="container hero-inner">
+        <div class="hero-text" data-stagger>
+          <p class="badge"><span class="pulse"></span><span data-i18n="hero_badge">Disponibile per tirocinio</span></p>
+          <p class="hero-hello" data-i18n="hero_hello">Ciao, sono</p>
+          <h1 class="hero-name">Nicolò <span class="grad">Cecchetto</span></h1>
+          <p class="hero-title" data-i18n="hero_title">Studente di Digital Management | Operations, Business Development e Analisi Aziendale</p>
+          <p class="hero-tagline" data-i18n="hero_tagline">Approccio pratico e analitico, esperienza sul campo in una PMI e uno sguardo internazionale.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="CV-Nicolo-Cecchetto.pdf" download>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>
+              <span data-i18n="hero_cv">Scarica CV</span>
+            </a>
+            <a class="btn btn-ghost" href="#contact" data-i18n="hero_contact">Contattami</a>
+          </div>
+          <p class="hero-loc">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+            <span data-i18n="hero_location">Stoccolma, Svezia</span>
+          </p>
+        </div>
 
-  <section id="contatti">
-    <h2>Contatti</h2>
-    <p>Email: tuaemail@esempio.com</p>
-    <p><a href="https://linkedin.com/in/tuoprofilo">LinkedIn</a></p>
-  </section>
+        <div class="hero-visual reveal" aria-hidden="true">
+          <div class="ring"></div>
+          <div class="ring r2"></div>
+          <div class="monogram">NC</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CHI SONO ============ -->
+    <section id="about" class="section">
+      <div class="container">
+        <header class="section-head reveal">
+          <span class="eyebrow">01</span>
+          <h2 data-i18n="sec_about">Chi sono</h2>
+        </header>
+
+        <div class="about-grid">
+          <div class="about-text" data-stagger>
+            <p data-i18n="about_p1">Sono uno studente di Digital Management all'Università Ca' Foscari di Venezia, in un corso interamente in inglese, e attualmente sto vivendo un'esperienza Erasmus+ a Stoccolma presso la Södertörn University.</p>
+            <p data-i18n="about_p2">Ho maturato esperienza pratica nelle attività operative di una PMI italiana: vendite, acquisti, analisi dei ricavi, controllo dei costi, fatturazione, e-commerce e marketing digitale. Ho un approccio pratico e analitico e ho lavorato in contesti internazionali e multiculturali.</p>
+            <p data-i18n="about_p3">Ragiono prima di agire e, quando c'è da lavorare, non guardo mai l'orario. Ogni estate lavoro nelle attività di famiglia tra Jesolo e Cavallino-Treporti.</p>
+            <ul class="chips">
+              <li class="chip" data-i18n="trait_outgoing">Estroverso</li>
+              <li class="chip" data-i18n="trait_structured">Schematico</li>
+              <li class="chip" data-i18n="trait_punctual">Puntuale</li>
+              <li class="chip" data-i18n="trait_driven">Ultra motivato</li>
+              <li class="chip" data-i18n="trait_resourceful">Intraprendente</li>
+              <li class="chip" data-i18n="trait_fast">Impara in fretta</li>
+            </ul>
+          </div>
+
+          <div class="about-cards" data-stagger>
+            <article class="card info-card">
+              <span class="card-label" data-i18n="card_now_label">Ora</span>
+              <p data-i18n="card_now">Erasmus+ a Stoccolma, Södertörn University</p>
+            </article>
+            <article class="card info-card">
+              <span class="card-label" data-i18n="card_goal_label">Obiettivo</span>
+              <p data-i18n="card_goal">Tirocinio di circa 600 ore nella parte finale del percorso universitario; disponibile anche per opportunità durante l'Erasmus a Stoccolma.</p>
+            </article>
+            <article class="card info-card">
+              <span class="card-label" data-i18n="card_study_label">Studi</span>
+              <p data-i18n="card_study">Digital Management, Università Ca' Foscari Venezia</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ESPERIENZA ============ -->
+    <section id="experience" class="section alt">
+      <div class="container">
+        <header class="section-head reveal">
+          <span class="eyebrow">02</span>
+          <h2 data-i18n="sec_experience">Esperienza professionale</h2>
+        </header>
+
+        <div class="timeline">
+          <article class="t-item card reveal">
+            <div class="t-meta">
+              <span class="t-date">2022 – 2026</span>
+              <span class="t-company">Gienne Srl · Italia</span>
+            </div>
+            <h3 data-i18n="exp1_role">Assistente Operations e Marketing Digitale</h3>
+            <p class="t-note" data-i18n="exp1_note">Attività di famiglia; oggi gestisco contabilità e backend.</p>
+            <ul class="bullets">
+              <li data-i18n="exp1_b1">Supporto alle vendite quotidiane e alla gestione delle relazioni con i clienti, incluse interazioni B2B con clienti internazionali.</li>
+              <li data-i18n="exp1_b2">Emissione di fatture, monitoraggio dei costi operativi e supporto alla gestione amministrativa e finanziaria.</li>
+              <li data-i18n="exp1_b3">Analisi dell'andamento dei ricavi circa ogni due mesi, con confronto con gli anni precedenti per individuare tendenze e supportare le decisioni aziendali.</li>
+              <li data-i18n="exp1_b4">Gestione degli approvvigionamenti e coordinamento degli ordini con i fornitori, con attenzione a disponibilità, qualità ed efficienza dei costi.</li>
+              <li data-i18n="exp1_b5">Gestione di campagne Meta Ads e supporto all'acquisizione digitale di clienti.</li>
+              <li data-i18n="exp1_b6">Sviluppo e gestione del sito e-commerce aziendale su Shopify e supporto alle attività commerciali collegate.</li>
+            </ul>
+          </article>
+
+          <article class="t-item card reveal">
+            <div class="t-meta">
+              <span class="t-date">2023</span>
+              <span class="t-company">Studio Rag. Lanza · Venezia</span>
+            </div>
+            <h3 data-i18n="exp2_role">Stagista Contabilità e Paghe</h3>
+            <p class="t-note" data-i18n="exp2_note">Tirocinio di un mese</p>
+            <ul class="bullets">
+              <li data-i18n="exp2_b1">Supporto all'elaborazione delle buste paga dei dipendenti delle aziende clienti e alle procedure amministrative e contabili.</li>
+              <li data-i18n="exp2_b2">Gestione di informazioni aziendali e del personale riservate, con precisione e attenzione ai dettagli.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FORMAZIONE ============ -->
+    <section id="education" class="section">
+      <div class="container">
+        <header class="section-head reveal">
+          <span class="eyebrow">03</span>
+          <h2 data-i18n="sec_education">Formazione</h2>
+        </header>
+
+        <div class="edu-grid" data-stagger>
+          <article class="card edu-card edu-main">
+            <div class="t-meta">
+              <span class="t-date">2024 – 2027</span>
+              <span class="t-company" data-i18n="edu1_school">Università Ca' Foscari Venezia</span>
+            </div>
+            <h3 data-i18n="edu1_title">Laurea triennale in Digital Management</h3>
+            <p data-i18n="edu1_desc">Percorso su trasformazione digitale, strategia aziendale, management, finanza, marketing e decisioni basate sui dati.</p>
+            <p class="card-label" data-i18n="edu1_exams">Esami rilevanti</p>
+            <ul class="chips small">
+              <li class="chip" data-i18n="ex1">Microeconomia</li>
+              <li class="chip" data-i18n="ex2">Macroeconomia</li>
+              <li class="chip" data-i18n="ex3">Diritto dell'Informatica</li>
+              <li class="chip" data-i18n="ex4">Management e Innovazione</li>
+              <li class="chip" data-i18n="ex5">Organizzazione nel Mondo Digitale</li>
+              <li class="chip" data-i18n="ex6">E-Business</li>
+              <li class="chip" data-i18n="ex7">Finanziamento delle Imprese ad Alta Crescita</li>
+              <li class="chip" data-i18n="ex8">Marketing Strategico</li>
+              <li class="chip" data-i18n="ex9">Statistica e Programmazione</li>
+            </ul>
+          </article>
+
+          <article class="card edu-card">
+            <div class="t-meta">
+              <span class="t-date" data-i18n="edu2_date">Set 2026 – Gen 2027</span>
+              <span class="status" data-i18n="edu2_status">In corso</span>
+            </div>
+            <h3 data-i18n="edu2_title">Erasmus+ · Södertörn University, Stoccolma</h3>
+            <p data-i18n="edu2_desc">Corsi su innovazione e sviluppo sostenibile.</p>
+          </article>
+
+          <article class="card edu-card">
+            <div class="t-meta">
+              <span class="t-date">2024</span>
+              <span class="t-company">Istituto Tecnico Leon Battista Alberti, San Donà di Piave</span>
+            </div>
+            <h3 data-i18n="edu3_title">Diploma in Relazioni Internazionali per il Marketing</h3>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ COMPETENZE ============ -->
+    <section id="skills" class="section alt">
+      <div class="container">
+        <header class="section-head reveal">
+          <span class="eyebrow">04</span>
+          <h2 data-i18n="sec_skills">Competenze</h2>
+        </header>
+
+        <div class="skills-grid" data-stagger>
+          <article class="card skill-card">
+            <h3 data-i18n="cat_business">Business</h3>
+            <ul class="chips">
+              <li class="chip" data-i18n="s_sales">Vendite e relazione con i clienti</li>
+              <li class="chip" data-i18n="s_fin">Analisi finanziaria e controllo costi</li>
+              <li class="chip" data-i18n="s_proc">Acquisti e gestione fornitori</li>
+              <li class="chip" data-i18n="s_rev">Analisi dei ricavi e reportistica</li>
+              <li class="chip" data-i18n="s_ecom">Gestione e-commerce</li>
+              <li class="chip" data-i18n="s_inv">Fatturazione e amministrazione</li>
+            </ul>
+          </article>
+
+          <article class="card skill-card">
+            <h3 data-i18n="cat_tools">Strumenti</h3>
+            <ul class="chips">
+              <li class="chip">Microsoft Excel</li>
+              <li class="chip">Google Sheets</li>
+              <li class="chip">PowerPoint</li>
+              <li class="chip" data-i18n="s_suites">Pacchetto Google e Microsoft</li>
+              <li class="chip">Shopify</li>
+              <li class="chip">WordPress</li>
+              <li class="chip">Meta Business Suite</li>
+              <li class="chip">Google Analytics</li>
+              <li class="chip" data-i18n="s_video">Editing video base</li>
+              <li class="chip" data-i18n="s_ai">Modelli di IA (ChatGPT, Claude e altri)</li>
+            </ul>
+          </article>
+
+          <article class="card skill-card">
+            <h3 data-i18n="cat_tech">Tecniche</h3>
+            <ul class="chips">
+              <li class="chip" data-i18n="s_python">Python (livello accademico)</li>
+              <li class="chip" data-i18n="s_data">Analisi dei dati (livello accademico)</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ LINGUE ============ -->
+    <section id="languages" class="section">
+      <div class="container">
+        <header class="section-head reveal">
+          <span class="eyebrow">05</span>
+          <h2 data-i18n="sec_languages">Lingue</h2>
+        </header>
+
+        <div class="lang-grid" data-stagger>
+          <!-- Indicatori sulla scala CEFR (A1–C2): 6 segmenti. "on" = pieno, "half" = a metà -->
+          <article class="card lang-card">
+            <div class="lang-top"><h3 data-i18n="lang_it">Italiano</h3><span class="level" data-i18n="lang_it_level">Madrelingua</span></div>
+            <div class="meter" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+          </article>
+          <article class="card lang-card">
+            <div class="lang-top"><h3 data-i18n="lang_en">Inglese</h3><span class="level">B2 · IELTS</span></div>
+            <div class="meter" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div>
+          </article>
+          <article class="card lang-card">
+            <div class="lang-top"><h3 data-i18n="lang_de">Tedesco</h3><span class="level">B1/B2</span></div>
+            <div class="meter" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="half"></i><i></i><i></i></div>
+          </article>
+          <article class="card lang-card">
+            <div class="lang-top"><h3 data-i18n="lang_ru">Russo</h3><span class="level">A1</span></div>
+            <div class="meter" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i><i></i></div>
+          </article>
+        </div>
+        <p class="scale-note reveal" data-i18n="lang_scale">Scala CEFR: A1 · A2 · B1 · B2 · C1 · C2</p>
+      </div>
+    </section>
+
+    <!-- ============ INTERESSI ============ -->
+    <section id="interests" class="section alt">
+      <div class="container">
+        <header class="section-head reveal">
+          <span class="eyebrow">06</span>
+          <h2 data-i18n="sec_interests">Interessi</h2>
+        </header>
+
+        <p class="lead reveal" data-i18n="interests_lead">Il settore dei camping village e del turismo open air è quello in cui ho più esperienza, insieme all'illuminotecnica, che mi affascina.</p>
+
+        <ul class="interest-grid" data-stagger>
+          <li class="card interest"><span aria-hidden="true">🚀</span><span data-i18n="int_entre">Imprenditorialità</span></li>
+          <li class="card interest"><span aria-hidden="true">📈</span><span data-i18n="int_bizdev">Business development</span></li>
+          <li class="card interest"><span aria-hidden="true">⛺</span><span data-i18n="int_camping">Camping village e turismo open air</span></li>
+          <li class="card interest"><span aria-hidden="true">💡</span><span data-i18n="int_light">Illuminotecnica</span></li>
+          <li class="card interest"><span aria-hidden="true">✈️</span><span data-i18n="int_travel">Viaggi</span></li>
+          <li class="card interest"><span aria-hidden="true">⚽</span><span data-i18n="int_sport">Sport</span></li>
+          <li class="card interest"><span aria-hidden="true">🎣</span><span data-i18n="int_fishing">Pesca</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ CONTATTI ============ -->
+    <section id="contact" class="section">
+      <div class="container">
+        <header class="section-head reveal">
+          <span class="eyebrow">07</span>
+          <h2 data-i18n="sec_contact">Contatti</h2>
+        </header>
+
+        <div class="contact-card card reveal">
+          <p class="lead" data-i18n="contact_lead">Cerco un tirocinio di circa 600 ore. Se pensi che possiamo lavorare insieme, scrivimi.</p>
+          <div class="contact-actions">
+            <a class="btn btn-primary" href="mailto:nicolocecchetto05@gmail.com">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+              <span data-i18n="contact_email">Scrivimi via email</span>
+            </a>
+            <a class="btn btn-ghost" href="https://linkedin.com/in/nicolo-cecchetto" target="_blank" rel="noopener noreferrer" data-i18n-aria="aria_linkedin" aria-label="Apri il profilo LinkedIn di Nicolò Cecchetto (si apre in una nuova scheda)">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+              <span data-i18n="contact_linkedin">Vedi il profilo LinkedIn</span>
+            </a>
+          </div>
+          <ul class="contact-list">
+            <li>
+              <span class="card-label">Email</span>
+              <a href="mailto:nicolocecchetto05@gmail.com">nicolocecchetto05@gmail.com</a>
+            </li>
+            <li>
+              <span class="card-label">LinkedIn</span>
+              <a href="https://linkedin.com/in/nicolo-cecchetto" target="_blank" rel="noopener noreferrer">linkedin.com/in/nicolo-cecchetto</a>
+            </li>
+            <li>
+              <span class="card-label" data-i18n="contact_loc_label">Sede</span>
+              <span data-i18n="hero_location">Stoccolma, Svezia</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>© <span id="year">2026</span> Nicolò Cecchetto · <span data-i18n="footer_rights">Tutti i diritti riservati</span></p>
+      <a href="#home" class="to-top" data-i18n="footer_top">Torna su ↑</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
