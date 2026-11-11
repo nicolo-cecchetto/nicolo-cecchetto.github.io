@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://nicolo-cecchetto.github.io/sitemap.xml
